@@ -1,0 +1,17 @@
+name: Mac-Per-Papa-FINAL
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: macos-12
+    steps:
+      - name: Install Ngrok
+        run: brew install --cask ngrok
+      - name: Start Tunnel
+        run: |
+          ngrok config add-authtoken ${{ secrets.NGROK_AUTH_TOKEN }}
+          ngrok tcp 5900 &
+      - name: Activate VNC
+        run: |
+          sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -activate -configure -access -on -clientopts -setvncpw -vncpw ${{ secrets.VNC_PASSWORD }} -restart -agent -privs -all
+      - name: Keep Alive
+        run: sleep 21600
