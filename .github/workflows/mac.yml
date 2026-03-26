@@ -18,3 +18,4 @@ jobs:
       run: source configure.sh "$NGROK_AUTH_TOKEN" "$TELEGRAM_TOKEN" "$TELEGRAM_CHAT"
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v2
+      
